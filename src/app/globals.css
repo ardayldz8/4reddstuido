@@ -1,26 +1,407 @@
 @import "tailwindcss";
 
+/* ============================================
+   REDD STUDIO - Design System
+   ============================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Background Colors */
+  --background: #0A0A0A;
+  --background-secondary: #111111;
+  --background-tertiary: #1A1A1A;
+
+  /* Foreground Colors */
+  --foreground: #FFFFFF;
+  --foreground-muted: #A1A1A1;
+  --foreground-subtle: #666666;
+
+  /* Accent Colors - REDD */
+  --accent: #FF3333;
+  --accent-hover: #FF5555;
+  --accent-dark: #CC2929;
+  --accent-glow: rgba(255, 51, 51, 0.3);
+
+  /* Border Colors */
+  --border: #222222;
+  --border-hover: #333333;
+
+  /* Gradients */
+  --gradient-accent: linear-gradient(135deg, #FF3333 0%, #FF6666 100%);
+  --gradient-dark: linear-gradient(180deg, #0A0A0A 0%, #111111 100%);
+
+  /* Shadows */
+  --shadow-accent: 0 0 40px rgba(255, 51, 51, 0.25);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-outfit);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================
+   Base Styles
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Outfit', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ============================================
+   Typography
+   ============================================ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+p {
+  color: var(--foreground-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* ============================================
+   Custom Scrollbar
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-hover);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* ============================================
+   Button Styles
+   ============================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--background);
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  box-shadow: var(--shadow-accent);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--foreground);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--foreground);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================
+   Card Styles
+   ============================================ */
+
+.card {
+  background: var(--background-secondary);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-card);
+  transform: translateY(-4px);
+}
+
+.card-glass {
+  background: rgba(17, 17, 17, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================
+   Section Styles
+   ============================================ */
+
+.section {
+  padding: 6rem 0;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ============================================
+   Text Gradient
+   ============================================ */
+
+.text-gradient {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px var(--accent-glow);
+  }
+
+  50% {
+    box-shadow: 0 0 40px var(--accent-glow);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* ============================================
+   Navigation Styles
+   ============================================ */
+
+.nav-link {
+  color: var(--foreground-muted);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--foreground);
+}
+
+/* ============================================
+   Hero Specific
+   ============================================ */
+
+.hero-gradient {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 0;
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* ============================================
+   Light Rays Animation (ReactBits)
+   ============================================ */
+
+@keyframes light-ray-move {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--ray-rotation, 0deg));
+    opacity: var(--ray-opacity, 0.6);
+  }
+
+  50% {
+    transform: translateY(-30px) rotate(var(--ray-rotation, 0deg));
+    opacity: calc(var(--ray-opacity, 0.6) * 1.2);
+  }
+}
+
+@keyframes light-ray-pulse {
+
+  0%,
+  100% {
+    filter: blur(var(--ray-blur, 40px)) brightness(1);
+  }
+
+  50% {
+    filter: blur(var(--ray-blur, 40px)) brightness(1.3);
+  }
+}
+
+.light-rays-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.light-ray {
+  position: absolute;
+  width: var(--ray-width, 200px);
+  height: var(--ray-height, 600px);
+  background: linear-gradient(180deg,
+      var(--ray-color, rgba(255, 51, 51, 0.4)) 0%,
+      transparent 100%);
+  filter: blur(var(--ray-blur, 40px));
+  opacity: var(--ray-opacity, 0.6);
+  transform-origin: top center;
+  animation:
+    light-ray-move var(--ray-duration, 8s) ease-in-out infinite,
+    light-ray-pulse var(--ray-pulse-duration, 4s) ease-in-out infinite;
+}
+
+/* ============================================
+   Text Pressure Styles (ReactBits)
+   ============================================ */
+
+.text-pressure-container {
+  position: relative;
+  display: inline-block;
+}
+
+.text-pressure-char {
+  display: inline-block;
+  transition: font-weight 0.1s ease-out;
+  font-variation-settings: 'wght' var(--char-weight, 400);
+}
+
+/* Variable font fallback */
+@supports (font-variation-settings: 'wght' 400) {
+  .text-pressure-char {
+    font-weight: var(--char-weight, 400);
+  }
+}
+
+/* ============================================
+   Staggered Menu Styles (ReactBits)
+   ============================================ */
+
+.staggered-menu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.staggered-menu-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.staggered-menu-item::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.staggered-menu-item:hover::after {
+  width: 100%;
 }
