@@ -48,7 +48,7 @@ export default function HeroSection() {
             {/* Light Rays Background - Coming from Left */}
             <LightRays
                 raysOrigin="left"
-                raysColor="#FF3333"
+                raysColor="#CC2929"
                 raysSpeed={1.0}
                 lightSpread={2.0}
                 rayLength={2.5}
@@ -79,13 +79,13 @@ export default function HeroSection() {
                                     className="text-7xl md:text-8xl lg:text-[10rem] font-black text-white inline-block"
                                     style={{
                                         fontFamily: "Outfit, sans-serif",
-                                        textShadow: "0 0 40px rgba(255, 51, 51, 0.3)",
+                                        textShadow: "0 0 40px rgba(204, 41, 41, 0.3)",
                                         marginRight: "-0.02em",
                                     }}
                                     whileHover={{
                                         scale: 1.05,
-                                        color: "#FF3333",
-                                        textShadow: "0 0 60px rgba(255, 51, 51, 0.8)",
+                                        color: "#CC2929",
+                                        textShadow: "0 0 60px rgba(204, 41, 41, 0.8)",
                                         transition: { duration: 0.2 }
                                     }}
                                 >
@@ -102,13 +102,13 @@ export default function HeroSection() {
                                 height: "clamp(48px, 7vw, 115px)",
                                 marginLeft: "0.4rem",
                                 marginTop: "0.15em",
-                                boxShadow: "0 0 40px rgba(255, 51, 51, 0.3)",
+                                boxShadow: "0 0 40px rgba(204, 41, 41, 0.3)",
                             }}
                             custom={4} // After the 4 letters of REDD
                             variants={letterVariants}
                             whileHover={{
                                 scale: 1.05,
-                                boxShadow: "0 0 60px rgba(255, 51, 51, 0.8)",
+                                boxShadow: "0 0 60px rgba(204, 41, 41, 0.8)",
                                 transition: { duration: 0.2 }
                             }}
                         />
@@ -124,13 +124,13 @@ export default function HeroSection() {
                                 className="text-7xl md:text-8xl lg:text-[10rem] font-black text-white inline-block"
                                 style={{
                                     fontFamily: "Outfit, sans-serif",
-                                    textShadow: "0 0 40px rgba(255, 51, 51, 0.3)",
+                                    textShadow: "0 0 40px rgba(204, 41, 41, 0.3)",
                                     marginRight: "-0.02em",
                                 }}
                                 whileHover={{
                                     scale: 1.05,
-                                    color: "#FF3333",
-                                    textShadow: "0 0 60px rgba(255, 51, 51, 0.8)",
+                                    color: "#CC2929",
+                                    textShadow: "0 0 60px rgba(204, 41, 41, 0.8)",
                                     transition: { duration: 0.2 }
                                 }}
                             >
