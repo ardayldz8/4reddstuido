@@ -33,6 +33,7 @@ interface StaggeredMenuProps {
     closeOnClickAway?: boolean;
     onMenuOpen?: () => void;
     onMenuClose?: () => void;
+    comingSoon?: boolean;
 }
 
 export default function StaggeredMenu({
@@ -51,7 +52,8 @@ export default function StaggeredMenu({
     isFixed = false,
     closeOnClickAway = true,
     onMenuOpen,
-    onMenuClose
+    onMenuClose,
+    comingSoon = false
 }: StaggeredMenuProps) {
     const [open, setOpen] = useState(false);
     const openRef = useRef(false);
@@ -433,36 +435,54 @@ export default function StaggeredMenu({
 
             <aside id="staggered-menu-panel" ref={panelRef} className="staggered-menu-panel" aria-hidden={!open}>
                 <div className="sm-panel-inner">
-                    <ul className="sm-panel-list" role="list" data-numbering={displayItemNumbering || undefined}>
-                        {items && items.length ? (
-                            items.map((it, idx) => (
-                                <li className="sm-panel-itemWrap" key={it.label + idx}>
-                                    <Link className="sm-panel-item" href={it.link} aria-label={it.ariaLabel} data-index={idx + 1} onClick={closeMenu}>
-                                        <span className="sm-panel-itemLabel">{it.label}</span>
-                                    </Link>
-                                </li>
-                            ))
-                        ) : (
-                            <li className="sm-panel-itemWrap" aria-hidden="true">
-                                <span className="sm-panel-item">
-                                    <span className="sm-panel-itemLabel">No items</span>
-                                </span>
-                            </li>
-                        )}
-                    </ul>
-                    {displaySocials && socialItems && socialItems.length > 0 && (
-                        <div className="sm-socials" aria-label="Social links">
-                            <h3 className="sm-socials-title">Socials</h3>
-                            <ul className="sm-socials-list" role="list">
-                                {socialItems.map((s, i) => (
-                                    <li key={s.label + i} className="sm-socials-item">
-                                        <a href={s.link} target="_blank" rel="noopener noreferrer" className="sm-socials-link">
-                                            {s.label}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
+                    {comingSoon ? (
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            height: '100%',
+                            fontSize: '3rem',
+                            fontWeight: '700',
+                            color: '#000',
+                            textTransform: 'uppercase',
+                            letterSpacing: '-0.02em'
+                        }}>
+                            Coming Soon
                         </div>
+                    ) : (
+                        <>
+                            <ul className="sm-panel-list" role="list" data-numbering={displayItemNumbering || undefined}>
+                                {items && items.length ? (
+                                    items.map((it, idx) => (
+                                        <li className="sm-panel-itemWrap" key={it.label + idx}>
+                                            <Link className="sm-panel-item" href={it.link} aria-label={it.ariaLabel} data-index={idx + 1} onClick={closeMenu}>
+                                                <span className="sm-panel-itemLabel">{it.label}</span>
+                                            </Link>
+                                        </li>
+                                    ))
+                                ) : (
+                                    <li className="sm-panel-itemWrap" aria-hidden="true">
+                                        <span className="sm-panel-item">
+                                            <span className="sm-panel-itemLabel">No items</span>
+                                        </span>
+                                    </li>
+                                )}
+                            </ul>
+                            {displaySocials && socialItems && socialItems.length > 0 && (
+                                <div className="sm-socials" aria-label="Social links">
+                                    <h3 className="sm-socials-title">Socials</h3>
+                                    <ul className="sm-socials-list" role="list">
+                                        {socialItems.map((s, i) => (
+                                            <li key={s.label + i} className="sm-socials-item">
+                                                <a href={s.link} target="_blank" rel="noopener noreferrer" className="sm-socials-link">
+                                                    {s.label}
+                                                </a>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+                        </>
                     )}
                 </div>
             </aside>

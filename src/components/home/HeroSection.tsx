@@ -32,7 +32,7 @@ export default function HeroSection() {
             {/* 3D Model Background - Number 4 */}
             <ModelViewer
                 url="/models/number4.glb"
-                opacity={0.4}
+                opacity={0.55}
                 autoRotate={false}
                 defaultZoom={2}
                 modelXOffset={0}
