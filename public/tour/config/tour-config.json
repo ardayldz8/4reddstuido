@@ -100,7 +100,7 @@
                 {
                     "id": "Point04",
                     "type": "navigate",
-                    "title": "Gorunum 4",
+                    "title": "Gorunum 5",
                     "tilt": -19.54,
                     "pan": -91.46,
                     "targetNode": "node5"
@@ -166,7 +166,7 @@
                 {
                     "id": "Point04",
                     "type": "navigate",
-                    "title": "Gorunum 4",
+                    "title": "Gorunum 5",
                     "tilt": -19.01,
                     "pan": -127.71,
                     "targetNode": "node5"
@@ -232,7 +232,7 @@
                 {
                     "id": "Point04",
                     "type": "navigate",
-                    "title": "Gorunum 4",
+                    "title": "Gorunum 5",
                     "tilt": -48.71,
                     "pan": -76.37,
                     "targetNode": "node5"
@@ -298,7 +298,7 @@
                 {
                     "id": "Point04",
                     "type": "navigate",
-                    "title": "Gorunum 4",
+                    "title": "Gorunum 5",
                     "tilt": -29.25,
                     "pan": -174.85,
                     "targetNode": "node5"

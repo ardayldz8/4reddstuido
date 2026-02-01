@@ -58,8 +58,34 @@ export default function MarzipanoViewer({ initialNode = 'node1', className }: Ma
             const config = (await response.json()) as TourConfig;
             if (cancelled) return;
 
-            const viewer = new Marzipano.Viewer(containerRef.current);
+            const viewer = new Marzipano.Viewer(containerRef.current, {
+                stage: {
+                    antialias: true
+                }
+            });
             viewerRef.current = viewer;
+
+            const controls = viewer.controls();
+            const controlContainer = (viewer as any)._controlContainer || containerRef.current;
+            if (controls.method('mouseViewDrag')) {
+                controls.disableMethod('mouseViewDrag');
+            }
+            if (controls.method('touchView')) {
+                controls.disableMethod('touchView');
+            }
+
+            const smoothMouse = new Marzipano.QtvrControlMethod(controlContainer, 'mouse', {
+                speed: 4,
+                friction: 9,
+                maxFrictionTime: 0.5
+            });
+            controls.registerMethod('smoothMouseQtvr', smoothMouse, true);
+
+            const smoothTouch = new Marzipano.DragControlMethod(controlContainer, 'touch', {
+                friction: 10,
+                maxFrictionTime: 0.6
+            });
+            controls.registerMethod('smoothTouchDrag', smoothTouch, true);
 
             const initialFov = Marzipano.util.degToRad(150);
             const minTilt = Marzipano.util.degToRad(-90);
@@ -67,6 +93,8 @@ export default function MarzipanoViewer({ initialNode = 'node1', className }: Ma
             const limiter = Marzipano.RectilinearView.limit.traditional(minTilt, maxTilt, initialFov, initialFov);
 
             config.nodes.forEach((node) => {
+                const startYaw = Marzipano.util.degToRad(config.view.start.pan);
+                const startPitch = Marzipano.util.degToRad(config.view.start.tilt);
                 const levels = node.input.levels.map((level) => {
                     const baseSize = Math.max(level.width, level.height);
                     const tileSize = node.input.tileSize;
@@ -87,8 +115,8 @@ export default function MarzipanoViewer({ initialNode = 'node1', className }: Ma
                 });
 
                 const view = new Marzipano.RectilinearView({
-                    yaw: Marzipano.util.degToRad(config.view.start.pan),
-                    pitch: Marzipano.util.degToRad(config.view.start.tilt),
+                    yaw: startYaw,
+                    pitch: startPitch,
                     fov: initialFov
                 }, limiter);
 
@@ -122,6 +150,8 @@ export default function MarzipanoViewer({ initialNode = 'node1', className }: Ma
                             const targetScene = scenesRef.current.get(hotspot.targetNode || '');
                             if (targetScene) {
                                 targetScene.switchTo();
+                                const view = targetScene.view();
+                                view.setFov(initialFov);
                             }
                         });
 
