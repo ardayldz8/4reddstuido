@@ -40,6 +40,13 @@ export const pricingItems: PricingItem[] = [
     category: "studio",
   },
   {
+    id: "studio-hourly",
+    title: "Saatlik Kiralama",
+    price: 1600,
+    category: "studio",
+    note: "Min. 2 saat",
+  },
+  {
     id: "godox-m600bi",
     title: "Godox M600Bi 600W Bi-Color LED Video Işığı",
     price: 1500,

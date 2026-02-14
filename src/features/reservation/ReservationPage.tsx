@@ -36,6 +36,7 @@ import { reddTheme } from "@/styles/muiTheme";
 import { packageTimingRules } from "@/features/reservation/constants/timingRules";
 import {
   buildWhatsappMessage,
+  calculatePackagePrice,
   calculateTotal,
   formatCurrency,
   getMinDate,
@@ -63,6 +64,7 @@ export default function ReservationPage() {
     email: "",
     date: "",
     timeSlot: "",
+    hourCount: "2",
     projectType: "",
     note: "",
   });
@@ -117,12 +119,21 @@ export default function ReservationPage() {
         return {
           ...prev,
           timeSlot: nextTiming.fixedSlot ?? nextTiming.slots[0],
+          hourCount: "2",
+        };
+      }
+
+      if (nextTiming.mode === "hourly") {
+        return {
+          ...prev,
+          timeSlot: "",
+          hourCount: prev.hourCount && Number(prev.hourCount) >= 2 ? prev.hourCount : "2",
         };
       }
 
       return nextTiming.slots.includes(prev.timeSlot)
-        ? prev
-        : { ...prev, timeSlot: "" };
+        ? { ...prev, hourCount: "2" }
+        : { ...prev, timeSlot: "", hourCount: "2" };
     });
   };
 
@@ -136,18 +147,37 @@ export default function ReservationPage() {
     });
   };
 
-  const totalPrice = calculateTotal(selectedPackage, selectedExtraItems);
+  const hourlyDuration = Math.max(Number(formValues.hourCount) || 0, 0);
+
+  const packagePrice = calculatePackagePrice({
+    selectedPackage,
+    selectedPackageTiming,
+    hourCount: hourlyDuration,
+  });
+
+  const totalPrice = calculateTotal(packagePrice, selectedExtraItems);
+
+  const hasValidTimeSelection =
+    selectedPackageTiming.mode === "full-day"
+      ? true
+      : Boolean(formValues.timeSlot.trim());
+
+  const hasValidHourlyDuration =
+    selectedPackageTiming.mode !== "hourly" || hourlyDuration >= 2;
 
   const canSubmit = Boolean(
     formValues.name.trim() &&
       formValues.phone.trim() &&
       formValues.date &&
-      (selectedPackageTiming.mode === "full-day" || formValues.timeSlot)
+      hasValidTimeSelection &&
+      hasValidHourlyDuration
   );
 
   const whatsappMessage = buildWhatsappMessage({
     selectedPackage,
     selectedPackageTiming,
+    packagePrice,
+    hourCount: hourlyDuration,
     selectedExtraItems,
     totalPrice,
     formValues,
@@ -247,6 +277,11 @@ export default function ReservationPage() {
                             label={
                               <Stack spacing={0.4}>
                                 <Typography fontWeight={700}>{item.title}</Typography>
+                                {item.note && (
+                                  <Typography variant="body2" color="text.secondary">
+                                    {item.note}
+                                  </Typography>
+                                )}
                                 <Typography color="primary.main" fontWeight={700}>
                                   {formatCurrency(item.price)}
                                 </Typography>
@@ -263,7 +298,7 @@ export default function ReservationPage() {
               <Card variant="outlined">
                 <CardContent>
                   <Typography variant="h3" sx={{ fontSize: { xs: 22, md: 30 } }}>
-                    2) Ek Ekipmanlar
+                    2) Kiralık Ek Ekipmanlar
                   </Typography>
                   <Typography sx={{ mt: 0.8, color: "text.secondary" }}>
                     Kategori sec ve sadece ihtiyacin olan ekipmanlari isaretle.
@@ -428,12 +463,12 @@ export default function ReservationPage() {
                     {selectedPackageTiming.mode === "full-day" ? (
                       <TextField
                         label="Saat Aralığı"
-                        value={selectedPackageTiming.fixedSlot ?? "10:00 - 18:00"}
+                        value={selectedPackageTiming.fixedSlot ?? "10:00 - 20:00"}
                         size="small"
                         disabled
                         helperText="Tam gun paketinde saat araligi sabittir."
                       />
-                    ) : (
+                    ) : selectedPackageTiming.mode === "half-day" ? (
                       <TextField
                         select
                         label="Saat Aralığı *"
@@ -450,6 +485,34 @@ export default function ReservationPage() {
                           </MenuItem>
                         ))}
                       </TextField>
+                    ) : (
+                      <>
+                        <TextField
+                          label="Saat Aralığı *"
+                          placeholder="Orn: 12:00 - 15:00"
+                          value={formValues.timeSlot}
+                          onChange={(event) =>
+                            setFormValues((prev) => ({ ...prev, timeSlot: event.target.value }))
+                          }
+                          size="small"
+                          helperText="Saatlik kiralamada en az 2 saat secilmelidir."
+                        />
+                        <TextField
+                          select
+                          label="Sure (Saat) *"
+                          value={formValues.hourCount}
+                          onChange={(event) =>
+                            setFormValues((prev) => ({ ...prev, hourCount: event.target.value }))
+                          }
+                          size="small"
+                        >
+                          {[2, 3, 4, 5, 6, 7, 8].map((hour) => (
+                            <MenuItem key={hour} value={String(hour)}>
+                              {hour} saat
+                            </MenuItem>
+                          ))}
+                        </TextField>
+                      </>
                     )}
                     <TextField
                       label="Proje Turu"
@@ -483,7 +546,7 @@ export default function ReservationPage() {
                     Tam Fiyat Referansi
                   </Typography>
                   <Typography sx={{ color: "text.secondary", mb: 1.2 }}>
-                    Bu alan sadece referans listesidir. Secili kalemler Ek Ekipmanlar alanindaki secimlerine gore isaretlenir.
+                    Bu alan sadece referans listesidir. Secili kalemler Kiralık Ek Ekipmanlar alanindaki secimlerine gore isaretlenir.
                   </Typography>
                   {groupedItems.map((group) => (
                     <Accordion
@@ -571,8 +634,13 @@ export default function ReservationPage() {
                   <Typography fontWeight={700} mt={0.5}>
                     {selectedPackage?.title}
                   </Typography>
+                  {selectedPackageTiming.mode === "hourly" && (
+                    <Typography variant="body2" color="text.secondary" mt={0.2}>
+                      {formatCurrency(selectedPackage?.price ?? 0)} x {hourlyDuration} saat
+                    </Typography>
+                  )}
                   <Typography color="primary.main" fontWeight={700}>
-                    {formatCurrency(selectedPackage?.price ?? 0)}
+                    {formatCurrency(packagePrice)}
                   </Typography>
                 </Card>
 
@@ -581,7 +649,7 @@ export default function ReservationPage() {
                   sx={{ bgcolor: "rgba(0,0,0,0.28)", p: 1.2, mt: 1 }}
                 >
                   <Typography color="text.secondary" variant="body2">
-                    Ek Ekipmanlar
+                    Kiralık Ek Ekipmanlar
                   </Typography>
                   {selectedExtraItems.length === 0 ? (
                     <Typography mt={0.5}>Ek ekipman secilmedi.</Typography>
@@ -635,7 +703,7 @@ export default function ReservationPage() {
 
                 {!canSubmit && (
                   <Typography variant="body2" color="text.secondary" mt={1}>
-                    Ad soyad, telefon ve tarih zorunludur. Yarım gun seciminde saat araligi da zorunludur.
+                    Ad soyad, telefon ve tarih zorunludur. Yarım gun ve saatlik secimlerde saat araligi zorunludur; saatlikte minimum 2 saat gereklidir.
                   </Typography>
                 )}
 
