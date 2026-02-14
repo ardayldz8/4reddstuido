@@ -123,6 +123,9 @@ export default function ReservationPage() {
                     </Card>
                   ))}
                 </Box>
+                <Typography sx={{ mt: 1.1, fontSize: 13, color: "text.secondary" }}>
+                  Bu fiyatlara KDV dahil degildir.
+                </Typography>
               </CardContent>
             </Card>
 
