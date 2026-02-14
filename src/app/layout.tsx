@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 
@@ -23,8 +24,10 @@ export default function RootLayout({
   return (
     <html lang="tr" className={outfit.variable}>
       <body className="antialiased">
-        <Header />
-        <main>{children}</main>
+        <AppRouterCacheProvider>
+          <Header />
+          <main>{children}</main>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

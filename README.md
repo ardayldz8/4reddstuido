@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# REDD Studio Web
 
-## Getting Started
+Next.js 16 (App Router) tabanli REDD Studio web sitesi.
 
-First, run the development server:
+## Komutlar
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run lint
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Klasor Yapisi
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+src/
+  app/
+    page.tsx
+    rezervasyon/page.tsx
+    tour/page.tsx
+    layout.tsx
+  components/
+    layout/
+    tour/
+    ui/
+  data/
+    pricing.ts
+  features/
+    home/
+      HomePage.tsx
+    reservation/
+      ReservationPage.tsx
+      constants/
+      lib/
+  styles/
+    muiTheme.ts
+  types/
+    marzipano.d.ts
+public/
+  brand/
+  images/hero/
+  tour/
+assets/raw/
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Mimari Kurallar
 
-## Learn More
+- `src/app/*`: sadece route composition ve metadata.
+- `src/features/*`: ekranin asil UI ve davranis katmani.
+- `src/components/*`: birden fazla feature tarafindan kullanilan ortak componentler.
+- `src/data/*`: sabit veri kaynaklari (fiyat listesi gibi).
+- `src/features/**/lib/*`: is kurali, hesaplama, mesaj olusturma gibi saf fonksiyonlar.
+- `src/styles/muiTheme.ts`: MUI tema merkezi; tekrar eden tema tanimlari eklenmez.
 
-To learn more about Next.js, take a look at the following resources:
+## Naming ve Kod Stili
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Component dosyalari: `PascalCase.tsx`
+- Utility dosyalari: `camelCase.ts`
+- Tek sorumluluk: buyuk sayfalari feature componentlerine bol.
+- Yeni sayfa eklerken `app` icinde wrapper, aski UI/logic `features` altinda tutulur.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Notlar
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Ham tasarim/brief dosyalari `assets/raw/` altinda saklanir.
+- Build ciktilari (`.next/`) repoya eklenmez.

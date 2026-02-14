@@ -30,6 +30,56 @@ interface TourConfig {
     }>;
 }
 
+interface MarzipanoTile {
+    face: string | number;
+    z: number;
+    x: number;
+    y: number;
+}
+
+interface MarzipanoScene {
+    switchTo: (options?: { transitionDuration?: number }) => void;
+    view: () => { setFov: (fov: number) => void };
+    hotspotContainer: () => {
+        createHotspot: (el: HTMLElement, coords: { yaw: number; pitch: number }) => void;
+    };
+}
+
+interface MarzipanoViewerInstance {
+    controls: () => {
+        method: (name: string) => unknown;
+        disableMethod: (name: string) => void;
+        registerMethod: (name: string, method: unknown, active: boolean) => void;
+    };
+    createScene: (config: unknown) => MarzipanoScene;
+    destroy?: () => void;
+    _controlContainer?: HTMLElement;
+}
+
+interface MarzipanoModule {
+    Viewer: new (container: HTMLElement, options: unknown) => MarzipanoViewerInstance;
+    QtvrControlMethod: new (container: HTMLElement, pointerType: string, options: unknown) => unknown;
+    DragControlMethod: new (container: HTMLElement, pointerType: string, options: unknown) => unknown;
+    CubeGeometry: new (levels: Array<{ tileSize: number; size: number }>) => unknown;
+    ImageUrlSource: new (factory: (tile: MarzipanoTile) => { url: string }) => unknown;
+    RectilinearView: {
+        new (params: { yaw: number; pitch: number; fov: number }, limiter: unknown): {
+            setFov: (fov: number) => void;
+        };
+        limit: {
+            traditional: (
+                minTilt: number,
+                maxTilt: number,
+                minFov: number,
+                maxFov: number
+            ) => unknown;
+        };
+    };
+    util: {
+        degToRad: (deg: number) => number;
+    };
+}
+
 const faceNameToIndex: Record<string, number> = {
     f: 0,
     r: 1,
@@ -41,17 +91,19 @@ const faceNameToIndex: Record<string, number> = {
 
 export default function MarzipanoViewer({ initialNode = 'node1', className }: MarzipanoViewerProps) {
     const containerRef = useRef<HTMLDivElement>(null);
-    const viewerRef = useRef<any>(null);
-    const scenesRef = useRef<Map<string, any>>(new Map());
+    const viewerRef = useRef<MarzipanoViewerInstance | null>(null);
+    const scenesRef = useRef<Map<string, MarzipanoScene>>(new Map());
 
     useEffect(() => {
         let cancelled = false;
+        const scenes = scenesRef.current;
 
         const init = async () => {
             if (!containerRef.current) return;
 
             const marzipanoModule = await import('marzipano');
-            const Marzipano = (marzipanoModule as any).default || marzipanoModule;
+            const Marzipano = ((marzipanoModule as { default?: unknown }).default ||
+                marzipanoModule) as unknown as MarzipanoModule;
 
             const response = await fetch('/tour/config/tour-config.json');
             if (!response.ok) return;
@@ -66,7 +118,7 @@ export default function MarzipanoViewer({ initialNode = 'node1', className }: Ma
             viewerRef.current = viewer;
 
             const controls = viewer.controls();
-            const controlContainer = (viewer as any)._controlContainer || containerRef.current;
+            const controlContainer = viewer._controlContainer || containerRef.current;
             if (controls.method('mouseViewDrag')) {
                 controls.disableMethod('mouseViewDrag');
             }
@@ -104,7 +156,7 @@ export default function MarzipanoViewer({ initialNode = 'node1', className }: Ma
 
                 const geometry = new Marzipano.CubeGeometry(levels);
 
-                const source = new Marzipano.ImageUrlSource((tile: any) => {
+                const source = new Marzipano.ImageUrlSource((tile: MarzipanoTile) => {
                     const faceIndex = typeof tile.face === 'string'
                         ? faceNameToIndex[tile.face]
                         : tile.face;
@@ -147,7 +199,7 @@ export default function MarzipanoViewer({ initialNode = 'node1', className }: Ma
                         el.style.backdropFilter = 'blur(6px)';
 
                         el.addEventListener('click', () => {
-                            const targetScene = scenesRef.current.get(hotspot.targetNode || '');
+                            const targetScene = scenes.get(hotspot.targetNode || '');
                             if (targetScene) {
                                 targetScene.switchTo();
                                 const view = targetScene.view();
@@ -161,10 +213,10 @@ export default function MarzipanoViewer({ initialNode = 'node1', className }: Ma
                     });
                 }
 
-                scenesRef.current.set(node.id, scene);
+                scenes.set(node.id, scene);
             });
 
-            const initialScene = scenesRef.current.get(initialNode) || scenesRef.current.values().next().value;
+            const initialScene = scenes.get(initialNode) || scenes.values().next().value;
             if (initialScene) {
                 initialScene.switchTo({ transitionDuration: 0 });
                 const view = initialScene.view();
@@ -177,7 +229,7 @@ export default function MarzipanoViewer({ initialNode = 'node1', className }: Ma
 
         return () => {
             cancelled = true;
-            scenesRef.current.clear();
+            scenes.clear();
             if (viewerRef.current?.destroy) {
                 viewerRef.current.destroy();
             }

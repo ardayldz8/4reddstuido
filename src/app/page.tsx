@@ -1,9 +1,5 @@
-import { MarzipanoViewer } from "@/components/tour";
+import HomePage from "@/features/home/HomePage";
 
-export default function Home() {
-  return (
-    <main className="relative w-screen h-screen bg-neutral-900 overflow-hidden">
-      <MarzipanoViewer initialNode="node1" className="w-full h-full" />
-    </main>
-  );
+export default function Page() {
+  return <HomePage />;
 }

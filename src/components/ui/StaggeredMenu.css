@@ -48,7 +48,7 @@
 
 .sm-logo-img {
     display: block;
-    height: 32px;
+    height: 48px;
     width: auto;
     object-fit: contain;
 }
@@ -145,9 +145,9 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: clamp(260px, 38vw, 420px);
+    width: clamp(320px, 42vw, 460px);
     height: 100%;
-    background: white;
+    background: #f3f3ef;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     display: flex;
@@ -167,7 +167,7 @@
     top: 0;
     right: 0;
     bottom: 0;
-    width: clamp(260px, 38vw, 420px);
+    width: clamp(320px, 42vw, 460px);
     pointer-events: none;
     z-index: 5;
 }
@@ -265,7 +265,7 @@
     margin: 0;
     font-size: 1rem;
     font-weight: 600;
-    color: #fff;
+    color: #e5e5eb;
     text-transform: uppercase;
 }
 
@@ -282,16 +282,20 @@
     position: relative;
     color: #000;
     font-weight: 600;
-    font-size: 3.5rem;
+    font-size: clamp(2.6rem, 5.2vw, 3.5rem);
     cursor: pointer;
     line-height: 1;
-    letter-spacing: -2px;
+    letter-spacing: -1px;
     text-transform: uppercase;
     transition:
         background 0.25s,
         color 0.25s;
     display: inline-block;
     text-decoration: none;
+    padding-right: 0.25em;
+}
+
+.sm-panel-list[data-numbering] .sm-panel-item {
     padding-right: 1.4em;
 }
 
@@ -356,6 +360,10 @@
 }
 
 @media (max-width: 640px) {
+    .sm-logo-img {
+        height: 40px;
+    }
+
     .staggered-menu-panel {
         width: 100%;
         left: 0;

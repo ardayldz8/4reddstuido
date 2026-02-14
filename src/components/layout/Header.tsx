@@ -3,11 +3,17 @@
 import StaggeredMenu from "@/components/ui/StaggeredMenu";
 
 export default function Header() {
+    const menuItems = [
+        { label: "Ana Sayfa", link: "/" },
+        { label: "Sanal Tur", link: "/tour" },
+        { label: "Rezervasyon", link: "/rezervasyon" },
+    ];
+
     return (
         <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', zIndex: 100, pointerEvents: 'none' }}>
             <StaggeredMenu
                 position="right"
-                items={[]}
+                items={menuItems}
                 socialItems={[]}
                 displaySocials={false}
                 displayItemNumbering={false}
@@ -19,7 +25,7 @@ export default function Header() {
                 isFixed={true}
                 closeOnClickAway={true}
                 logoUrl=""
-                comingSoon={true}
+                comingSoon={false}
             />
         </div>
     );

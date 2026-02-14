@@ -4,6 +4,7 @@
 
 import { MarzipanoViewer } from '@/components/tour';
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
     title: '360° Sanal Tur | REDD Studio',
@@ -25,7 +26,7 @@ export default function TourPage() {
             />
 
             {/* Back to Home Link */}
-            <a
+            <Link
                 href="/"
                 className="absolute top-8 left-8 z-30 flex items-center gap-2 text-white hover:text-[#FF3333] transition-colors"
             >
@@ -43,7 +44,7 @@ export default function TourPage() {
                     />
                 </svg>
                 <span className="font-medium">Ana Sayfa</span>
-            </a>
+            </Link>
         </main>
     );
 }
