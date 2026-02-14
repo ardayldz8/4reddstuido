@@ -249,7 +249,7 @@ export default function ReservationPage() {
                   >
                     <Button
                       component="a"
-                      href="https://wa.me/905348808211"
+                      href="https://wa.me/905419735370"
                       target="_blank"
                       rel="noopener noreferrer"
                       variant="contained"
@@ -276,13 +276,13 @@ export default function ReservationPage() {
                           WhatsApp Hatti 1
                         </Typography>
                         <Typography sx={{ fontSize: 13, lineHeight: 1.2, opacity: 0.95 }}>
-                          +90 534 880 82 11
+                          +90 541 973 53 70
                         </Typography>
                       </Stack>
                     </Button>
                     <Button
                       component="a"
-                      href="https://wa.me/905419735370"
+                      href="https://wa.me/905348808211"
                       target="_blank"
                       rel="noopener noreferrer"
                       variant="contained"
@@ -309,7 +309,7 @@ export default function ReservationPage() {
                           WhatsApp Hatti 2
                         </Typography>
                         <Typography sx={{ fontSize: 13, lineHeight: 1.2, opacity: 0.95 }}>
-                          +90 541 973 53 70
+                          +90 534 880 82 11
                         </Typography>
                       </Stack>
                     </Button>
