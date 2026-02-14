@@ -14,6 +14,11 @@ export const metadata: Metadata = {
   title: "REDD Studio | Premium Yaratıcı Stüdyolar",
   description: "Ciddi yaratıcılar için ciddi bir yer. Müzik prodüksiyonu, DJ, podcast ve fotoğraf stüdyoları.",
   keywords: ["stüdyo", "müzik prodüksiyonu", "DJ", "podcast", "fotoğraf stüdyosu", "İstanbul"],
+  icons: {
+    icon: "/brand/redd-logo.svg",
+    shortcut: "/brand/redd-logo.svg",
+    apple: "/brand/redd-logo.svg",
+  },
 };
 
 export default function RootLayout({

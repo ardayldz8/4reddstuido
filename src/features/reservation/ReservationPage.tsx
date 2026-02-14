@@ -174,7 +174,7 @@ export default function ReservationPage() {
             "radial-gradient(1200px 480px at 15% -10%, rgba(255,70,70,0.2), transparent 60%), radial-gradient(1000px 500px at 100% 5%, rgba(160,0,0,0.18), transparent 55%), #070707",
         }}
       >
-        <Container maxWidth={false} sx={{ maxWidth: 1380 }}>
+        <Container maxWidth={false} sx={{ maxWidth: 1380, px: { xs: 1.25, sm: 2.5 } }}>
           <Card
             sx={{
               border: "1px solid rgba(255,255,255,0.14)",
@@ -212,7 +212,7 @@ export default function ReservationPage() {
             <Stack spacing={2}>
               <Card variant="outlined">
                 <CardContent>
-                  <Typography variant="h3" sx={{ fontSize: 30 }}>
+                  <Typography variant="h3" sx={{ fontSize: { xs: 22, md: 30 } }}>
                     1) Stüdyo Paketi
                   </Typography>
                   <FormControl sx={{ mt: 2, width: "100%" }}>
@@ -262,7 +262,7 @@ export default function ReservationPage() {
 
               <Card variant="outlined">
                 <CardContent>
-                  <Typography variant="h3" sx={{ fontSize: 30 }}>
+                  <Typography variant="h3" sx={{ fontSize: { xs: 22, md: 30 } }}>
                     2) Ek Ekipmanlar
                   </Typography>
                   <Typography sx={{ mt: 0.8, color: "text.secondary" }}>
@@ -275,7 +275,16 @@ export default function ReservationPage() {
                       setActiveCategory(selectableCategories[value])
                     }
                     variant="scrollable"
-                    sx={{ mt: 1.5, minHeight: 44 }}
+                    sx={{
+                      mt: 1.5,
+                      minHeight: 44,
+                      maxWidth: "100%",
+                      "& .MuiTab-root": {
+                        minWidth: "auto",
+                        px: 1.1,
+                        fontSize: { xs: 13, sm: 14 },
+                      },
+                    }}
                   >
                     {selectableCategories.map((category) => (
                       <Tab
@@ -310,7 +319,16 @@ export default function ReservationPage() {
                           }}
                         >
                           <FormControlLabel
-                            sx={{ m: 0, p: 1.2, width: "100%", alignItems: "flex-start" }}
+                            sx={{
+                              m: 0,
+                              p: 1.2,
+                              width: "100%",
+                              alignItems: "flex-start",
+                              ".MuiFormControlLabel-label": {
+                                minWidth: 0,
+                                width: "100%",
+                              },
+                            }}
                             control={
                               <Checkbox
                                 checked={checked}
@@ -343,7 +361,9 @@ export default function ReservationPage() {
                       <Stack component="ul" sx={{ pl: 2, m: 0 }}>
                         {includedItems.map((item) => (
                           <Typography component="li" key={item.id} variant="body2">
-                            {item.title}
+                            <Box component="span" sx={{ wordBreak: "break-word" }}>
+                              {item.title}
+                            </Box>
                             {item.note ? ` - ${item.note}` : ""}
                           </Typography>
                         ))}
@@ -355,7 +375,7 @@ export default function ReservationPage() {
 
               <Card variant="outlined">
                 <CardContent>
-                  <Typography variant="h3" sx={{ fontSize: 30 }}>
+                  <Typography variant="h3" sx={{ fontSize: { xs: 22, md: 30 } }}>
                     3) Rezervasyon Formu
                   </Typography>
 
@@ -459,7 +479,7 @@ export default function ReservationPage() {
 
               <Card variant="outlined">
                 <CardContent>
-                  <Typography variant="h3" sx={{ fontSize: 26, mb: 1 }}>
+                  <Typography variant="h3" sx={{ fontSize: { xs: 21, md: 26 }, mb: 1 }}>
                     Tam Fiyat Referansi
                   </Typography>
                   <Typography sx={{ color: "text.secondary", mb: 1.2 }}>
