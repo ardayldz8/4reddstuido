@@ -384,3 +384,26 @@
         filter: invert(100%);
     }
 }
+
+.sm-address {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+}
+
+.sm-address-icon {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    flex-shrink: 0;
+}
+
+.sm-address-text {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #555;
+    line-height: 1.5;
+    font-weight: 500;
+}

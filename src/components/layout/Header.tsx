@@ -14,8 +14,11 @@ export default function Header() {
             <StaggeredMenu
                 position="right"
                 items={menuItems}
-                socialItems={[]}
-                displaySocials={false}
+                socialItems={[
+                    { label: "Instagram", link: "https://www.instagram.com/for4redd" },
+                    { label: "WhatsApp", link: "https://wa.me/905419735370" },
+                ]}
+                displaySocials={true}
                 displayItemNumbering={false}
                 menuButtonColor="#fff"
                 openMenuButtonColor="#000"
@@ -26,8 +29,8 @@ export default function Header() {
                 closeOnClickAway={true}
                 logoUrl=""
                 comingSoon={false}
+                address="Esenevler, Talatpaşa Cd, 34764 Ümraniye/İstanbul"
             />
         </div>
     );
 }
-

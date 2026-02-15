@@ -33,6 +33,7 @@ interface StaggeredMenuProps {
     closeOnClickAway?: boolean;
     onMenuOpen?: () => void;
     onMenuClose?: () => void;
+    address?: string;
     comingSoon?: boolean;
 }
 
@@ -53,6 +54,7 @@ export default function StaggeredMenu({
     closeOnClickAway = true,
     onMenuOpen,
     onMenuClose,
+    address = '',
     comingSoon = false
 }: StaggeredMenuProps) {
     const wrapperStyle: React.CSSProperties & { '--sm-accent'?: string } = accentColor
@@ -484,6 +486,12 @@ export default function StaggeredMenu({
                                 </div>
                             )}
                         </>
+                    )}
+                    {address && (
+                        <div className="sm-address">
+                            <span className="sm-address-icon">📍</span>
+                            <p className="sm-address-text">{address}</p>
+                        </div>
                     )}
                 </div>
             </aside>

@@ -84,11 +84,11 @@ export default function ReservationPage() {
                 variant="h1"
                 sx={{ mt: 1, fontSize: { xs: 30, md: 56 }, lineHeight: 1.1 }}
               >
-                Rezervasyon ve Fiyatlandirma
+                Rezervasyon ve Fiyatlandırma
               </Typography>
               <Typography sx={{ mt: 2, color: "rgba(255,255,255,0.8)", maxWidth: 780 }}>
-                Bu sayfa fiyat referans ve bilgilendirme amacli kullanilir. Rezervasyon
-                icin asagidaki WhatsApp numaralarindan dogrudan bize ulasabilirsin.
+                Bu sayfa fiyat referans ve bilgilendirme amaçlı kullanılır. Rezervasyon
+                için aşağıdaki WhatsApp numaralarından doğrudan bize ulaşabilirsin.
               </Typography>
             </CardContent>
           </Card>
@@ -111,20 +111,28 @@ export default function ReservationPage() {
                     <Card key={item.id} variant="outlined" sx={{ bgcolor: "rgba(0,0,0,0.25)" }}>
                       <CardContent>
                         <Typography sx={{ fontWeight: 700 }}>{item.title}</Typography>
-                        {item.note && (
-                          <Typography variant="body2" color="text.secondary" sx={{ mt: 0.3 }}>
-                            {item.note}
+                        {item.price > 0 ? (
+                          <>
+                            {item.note && (
+                              <Typography variant="body2" color="text.secondary" sx={{ mt: 0.3 }}>
+                                {item.note}
+                              </Typography>
+                            )}
+                            <Typography color="primary.main" fontWeight={700} sx={{ mt: 0.8 }}>
+                              {formatCurrency(item.price)}
+                            </Typography>
+                          </>
+                        ) : (
+                          <Typography color="primary.main" fontWeight={600} sx={{ mt: 0.8, fontStyle: "italic" }}>
+                            {item.note || "İletişime geçin"}
                           </Typography>
                         )}
-                        <Typography color="primary.main" fontWeight={700} sx={{ mt: 0.8 }}>
-                          {formatCurrency(item.price)}
-                        </Typography>
                       </CardContent>
                     </Card>
                   ))}
                 </Box>
                 <Typography sx={{ mt: 1.1, fontSize: 13, color: "text.secondary" }}>
-                  Bu fiyatlara KDV dahil degildir.
+                  Bu fiyatlara KDV dahil değildir.
                 </Typography>
               </CardContent>
             </Card>
@@ -132,14 +140,14 @@ export default function ReservationPage() {
             <Card variant="outlined">
               <CardContent>
                 <Typography variant="h3" sx={{ fontSize: { xs: 22, md: 30 } }}>
-                  2) Calisma Saatleri
+                  2) Çalışma Saatleri
                 </Typography>
                 <Stack spacing={0.9} sx={{ mt: 1.5 }}>
                   <Typography sx={{ color: "rgba(255,255,255,0.92)" }}>
-                    Tam Gun: 10:00 - 20:00
+                    Tam Gün: 10:00 - 20:00
                   </Typography>
                   <Typography sx={{ color: "rgba(255,255,255,0.92)" }}>
-                    Yarım Gun: 09:00 - 14:00 / 15:00 - 20:00
+                    Yarım Gün: 09:00 - 14:00 / 15:00 - 20:00
                   </Typography>
                   <Typography sx={{ color: "rgba(255,255,255,0.92)" }}>
                     Saatlik: 1800 TL (Min. 2 Saat)
@@ -225,10 +233,10 @@ export default function ReservationPage() {
             <Card variant="outlined">
               <CardContent>
                 <Typography variant="h3" sx={{ fontSize: { xs: 22, md: 30 } }}>
-                  4) Iletisim ve Rezervasyon
+                  4) İletişim ve Rezervasyon
                 </Typography>
                 <Typography sx={{ mt: 0.8, color: "text.secondary" }}>
-                  En hizli geri donus icin WhatsApp hatlarini kullanin.
+                  En hızlı geri dönüş için WhatsApp hatlarını kullanın.
                 </Typography>
 
                 <Box
@@ -273,7 +281,7 @@ export default function ReservationPage() {
                       <WhatsApp sx={{ mr: 1, fontSize: 20 }} />
                       <Stack spacing={0.1} alignItems="flex-start">
                         <Typography sx={{ fontWeight: 700, lineHeight: 1.2, fontSize: 15 }}>
-                          WhatsApp Hatti 1
+                          WhatsApp Hattı 1
                         </Typography>
                         <Typography sx={{ fontSize: 13, lineHeight: 1.2, opacity: 0.95 }}>
                           +90 541 973 53 70
@@ -306,7 +314,7 @@ export default function ReservationPage() {
                       <WhatsApp sx={{ mr: 1, fontSize: 20 }} />
                       <Stack spacing={0.1} alignItems="flex-start">
                         <Typography sx={{ fontWeight: 700, lineHeight: 1.2, fontSize: 15 }}>
-                          WhatsApp Hatti 2
+                          WhatsApp Hattı 2
                         </Typography>
                         <Typography sx={{ fontSize: 13, lineHeight: 1.2, opacity: 0.95 }}>
                           +90 534 880 82 11
@@ -315,7 +323,7 @@ export default function ReservationPage() {
                     </Button>
                   </Box>
                   <Typography sx={{ mt: 1.1, color: "text.secondary", fontSize: 12.5, textAlign: "center" }}>
-                    Ortalama geri donus: Gun icinde
+                    Ortalama geri dönüş: Gün içinde
                   </Typography>
                 </Box>
 

@@ -18,6 +18,7 @@ import ViewInArRounded from "@mui/icons-material/ViewInArRounded";
 import LightModeRounded from "@mui/icons-material/LightModeRounded";
 import ScheduleRounded from "@mui/icons-material/ScheduleRounded";
 import PlaceRounded from "@mui/icons-material/PlaceRounded";
+import DirectionsTransitRounded from "@mui/icons-material/DirectionsTransitRounded";
 import Groups2Rounded from "@mui/icons-material/Groups2Rounded";
 import BoltRounded from "@mui/icons-material/BoltRounded";
 import { reddTheme } from "@/styles/muiTheme";
@@ -48,14 +49,14 @@ const services = [
   {
     icon: ScheduleRounded,
     title: "Esnek Rezervasyon",
-    benefit: "Çekim planınızı yarım gün veya tam gün modeline göre optimize edin.",
+    benefit: "Çekim planınızı yarım gün, tam gün veya saatlik modeline göre optimize edin.",
     detail:
       "Net fiyatlandırma, hızlı teklif süreci ve operasyonu aksatmayan rezervasyon akışı.",
   },
   {
     icon: PlaceRounded,
     title: "Merkezi Konum",
-    benefit: "Ekip lojistiğini kolaylaştırarak set gününde zaman kazanın.",
+    benefit: "Adres: Esenevler, Talatpaşa Cd, 34764 Ümraniye/İstanbul",
     detail:
       "Ulaşımı pratik lokasyon sayesinde ekipman, ekip ve planlama süreçleri rahat ilerler.",
   },
@@ -178,7 +179,7 @@ export default function HomePage() {
                   lineHeight: { xs: 1.45, md: 1.28 },
                 }}
               >
-                İçerik üreticileri, markalar ve ekip çekimleri için tasarlanmış profesyonel stüdyo deneyimi.
+                İçerik üreticileri, markalar ve ekip çekimleri için tasarlanmış premium stüdyo deneyimi.
               </Typography>
 
               <Stack
@@ -255,6 +256,72 @@ export default function HomePage() {
               );
             })}
           </Box>
+
+          {/* Konum & Ulaşım */}
+          <Card sx={{ mt: 3, ...surfaceSx }}>
+            <CardContent sx={{ p: { xs: 3, md: 4 } }}>
+              <Stack direction="row" spacing={1.2} alignItems="center" sx={{ mb: 1 }}>
+                <PlaceRounded sx={{ color: "primary.main" }} />
+                <Typography variant="h3" sx={{ fontSize: { xs: 22, md: 28 } }}>
+                  Konum & Ulaşım
+                </Typography>
+              </Stack>
+              <Typography sx={{ color: "rgba(255,255,255,0.92)", fontWeight: 600, mb: 2.5 }}>
+                📍 Esenevler, Talatpaşa Cd, 34764 Ümraniye/İstanbul
+              </Typography>
+
+              <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1.5 }}>
+                <DirectionsTransitRounded sx={{ color: "primary.main", fontSize: 20 }} />
+                <Typography sx={{ fontWeight: 700, fontSize: 17 }}>
+                  Toplu Taşıma ile Ulaşım
+                </Typography>
+              </Stack>
+
+              <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: 2.5 }}>
+                <Box>
+                  <Typography sx={{ fontWeight: 700, color: "primary.main", mb: 0.5 }}>
+                    Kadıköy
+                  </Typography>
+                  <Typography sx={{ color: "rgba(255,255,255,0.88)", fontSize: 14 }}>
+                    İETT (8E) → Namık Kemal Mahallesi Durağı
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography sx={{ fontWeight: 700, color: "primary.main", mb: 0.5 }}>
+                    Üsküdar (Marmaray / Metro)
+                  </Typography>
+                  <Typography sx={{ color: "rgba(255,255,255,0.88)", fontSize: 14 }}>
+                    Üsküdar M5 Metro İstasyonu → Bulgurlu M5 Metro İstasyonu
+                  </Typography>
+                  <Typography sx={{ color: "rgba(255,255,255,0.68)", fontSize: 13, mt: 0.3 }}>
+                    1 km yürüyüş veya İETT (8E) → Namık Kemal Mahallesi Durağı
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography sx={{ fontWeight: 700, color: "primary.main", mb: 0.5 }}>
+                    M8 Metro Aktarma
+                  </Typography>
+                  <Typography sx={{ color: "rgba(255,255,255,0.88)", fontSize: 14 }}>
+                    M8 Dudullu → Bulgurlu M5 Metro İstasyonu
+                  </Typography>
+                  <Typography sx={{ color: "rgba(255,255,255,0.68)", fontSize: 13, mt: 0.3 }}>
+                    1 km yürüyüş veya İETT (8E) → Namık Kemal Mahallesi Durağı
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography sx={{ fontWeight: 700, color: "primary.main", mb: 0.5 }}>
+                    Metrobüs
+                  </Typography>
+                  <Typography sx={{ color: "rgba(255,255,255,0.88)", fontSize: 14 }}>
+                    {"Altunizade'den"} M5 → Bulgurlu M5 Metro İstasyonu
+                  </Typography>
+                  <Typography sx={{ color: "rgba(255,255,255,0.68)", fontSize: 13, mt: 0.3 }}>
+                    1 km yürüyüş veya İETT (8E) → Namık Kemal Mahallesi Durağı
+                  </Typography>
+                </Box>
+              </Box>
+            </CardContent>
+          </Card>
 
           <Card sx={{ mt: sectionSpacing, ...surfaceSx }}>
             <CardContent
@@ -381,26 +448,96 @@ export default function HomePage() {
           </Card>
 
           <Box
+            component="footer"
             sx={{
-              mt: 4,
-              py: 2.4,
+              mt: 6,
+              pt: 4,
+              pb: 3,
               borderTop: "1px solid rgba(255,255,255,0.12)",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              gap: 2,
-              flexWrap: "wrap",
             }}
           >
-            <Typography sx={{ fontWeight: 700 }}>
-              <Box component="span" sx={{ color: "primary.main" }}>REDD</Box> Studio
-            </Typography>
-            <Stack direction="row" spacing={1} alignItems="center">
-              <LightModeRounded sx={{ fontSize: 16, color: "rgba(255,255,255,0.72)" }} />
-              <Typography variant="body2" color="text.secondary">
-                Cesur ol. REDD çek.
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: { xs: "1fr", md: "1fr 1fr 1fr" },
+                gap: { xs: 3, md: 4 },
+                mb: 3,
+              }}
+            >
+              <Box>
+                <Typography sx={{ fontWeight: 700, fontSize: 18, mb: 1 }}>
+                  <Box component="span" sx={{ color: "primary.main" }}>REDD</Box> Studio
+                </Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>
+                  İçerik üreticileri, markalar ve ekip çekimleri için tasarlanmış premium stüdyo deneyimi.
+                </Typography>
+              </Box>
+
+              <Box>
+                <Typography sx={{ fontWeight: 700, fontSize: 15, mb: 1 }}>
+                  İletişim
+                </Typography>
+                <Stack spacing={0.6}>
+                  <Typography variant="body2" color="text.secondary">
+                    📍 Esenevler, Talatpaşa Cd, 34764 Ümraniye/İstanbul
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    📧 info@4redd.com
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    📱 +90 541 973 53 70
+                  </Typography>
+                </Stack>
+              </Box>
+
+              <Box>
+                <Typography sx={{ fontWeight: 700, fontSize: 15, mb: 1 }}>
+                  Bizi Takip Edin
+                </Typography>
+                <Stack direction="row" spacing={1.5}>
+                  <Box
+                    component="a"
+                    href="https://www.instagram.com/for4redd"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    sx={{ color: "text.secondary", textDecoration: "none", fontSize: 14, "&:hover": { color: "primary.main" } }}
+                  >
+                    Instagram
+                  </Box>
+                  <Box
+                    component="a"
+                    href="https://wa.me/905419735370"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    sx={{ color: "text.secondary", textDecoration: "none", fontSize: 14, "&:hover": { color: "#25D366" } }}
+                  >
+                    WhatsApp
+                  </Box>
+                </Stack>
+              </Box>
+            </Box>
+
+            <Box
+              sx={{
+                pt: 2,
+                borderTop: "1px solid rgba(255,255,255,0.08)",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                flexWrap: "wrap",
+                gap: 1,
+              }}
+            >
+              <Typography variant="body2" color="text.secondary" sx={{ fontSize: 12 }}>
+                © 2025 REDD Studio. Tüm hakları saklıdır.
               </Typography>
-            </Stack>
+              <Stack direction="row" spacing={1} alignItems="center">
+                <LightModeRounded sx={{ fontSize: 14, color: "rgba(255,255,255,0.5)" }} />
+                <Typography variant="body2" sx={{ color: "rgba(255,255,255,0.5)", fontSize: 12 }}>
+                  Cesur ol. REDD çek.
+                </Typography>
+              </Stack>
+            </Box>
           </Box>
         </Container>
       </Box>
