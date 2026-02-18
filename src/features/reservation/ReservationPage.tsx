@@ -1,10 +1,6 @@
 "use client";
 
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Alert,
   Box,
   Button,
   Card,
@@ -15,26 +11,12 @@ import {
   ThemeProvider,
   Typography,
 } from "@mui/material";
-import ExpandMoreRounded from "@mui/icons-material/ExpandMoreRounded";
 import WhatsApp from "@mui/icons-material/WhatsApp";
 import EmailRounded from "@mui/icons-material/EmailRounded";
 import Instagram from "@mui/icons-material/Instagram";
-import {
-  categoryLabels,
-  pricingItems,
-  type PricingCategory,
-} from "@/data/pricing";
+import { keyframes } from "@mui/system";
+import { pricingItems } from "@/data/pricing";
 import { reddTheme } from "@/styles/muiTheme";
-
-const categoryOrder: PricingCategory[] = [
-  "studio",
-  "lighting",
-  "audio",
-  "camera",
-  "modifiers",
-  "backdrop",
-  "included",
-];
 
 const studioPackageOrder = [
   "studio-full-day",
@@ -51,14 +33,24 @@ const studioPackages = pricingItems
     (a, b) =>
       studioPackageOrder.indexOf(a.id) - studioPackageOrder.indexOf(b.id)
   );
-const includedItems = pricingItems.filter((item) => item.category === "included");
-const rentalEquipmentGroups = categoryOrder
-  .filter((category) => category !== "studio" && category !== "included")
-  .map((category) => ({
-    category,
-    items: pricingItems.filter((item) => item.category === category),
-  }))
-  .filter((group) => group.items.length > 0);
+
+const comingSoonGlow = keyframes`
+  0% {
+    opacity: 0.75;
+    transform: translateY(0px);
+    text-shadow: 0 0 0 rgba(255, 77, 79, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-2px);
+    text-shadow: 0 0 16px rgba(255, 77, 79, 0.24);
+  }
+  100% {
+    opacity: 0.75;
+    transform: translateY(0px);
+    text-shadow: 0 0 0 rgba(255, 77, 79, 0);
+  }
+`;
 
 function formatCurrency(value: number) {
   return new Intl.NumberFormat("tr-TR", {
@@ -188,71 +180,34 @@ export default function ReservationPage() {
                   3) Ek Ekipmanlar
                 </Typography>
                 <Typography sx={{ color: "text.secondary", mb: 1.2 }}>
-                  Bu alan sadece referans listesidir.
+                  Bu bolum su an gecici olarak inaktif.
                 </Typography>
-
-                {rentalEquipmentGroups.map((group) => (
-                  <Accordion key={group.category} defaultExpanded={group.category === "lighting"}>
-                    <AccordionSummary expandIcon={<ExpandMoreRounded />}>
-                      <Typography
-                        fontWeight={700}
-                        color="primary.main"
-                        sx={{ textTransform: "uppercase", letterSpacing: 1 }}
-                      >
-                        {categoryLabels[group.category]}
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails sx={{ pt: 0.5 }}>
-                      <Stack spacing={0.8}>
-                        {group.items.map((item) => (
-                          <Box
-                            key={item.id}
-                            sx={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              alignItems: "center",
-                              gap: 2,
-                              fontSize: 14,
-                              px: 1,
-                              py: 0.4,
-                              borderRadius: 1,
-                              minWidth: 0,
-                            }}
-                          >
-                            <Typography
-                              variant="body2"
-                              sx={{ minWidth: 0, pr: 1, wordBreak: "break-word" }}
-                            >
-                              {item.title}
-                              {item.note ? ` (${item.note})` : ""}
-                            </Typography>
-                            <Typography variant="body2" fontWeight={700} sx={{ flexShrink: 0 }}>
-                              {formatCurrency(item.price)}
-                            </Typography>
-                          </Box>
-                        ))}
-                      </Stack>
-                    </AccordionDetails>
-                  </Accordion>
-                ))}
-
-                {includedItems.length > 0 && (
-                  <Alert severity="success" sx={{ mt: 2 }}>
-                    <Typography fontWeight={700} mb={0.5}>
-                      Hizmete Dahil
-                    </Typography>
-                    <Stack component="ul" sx={{ pl: 2, m: 0 }}>
-                      {includedItems.map((item) => (
-                        <Typography component="li" key={item.id} variant="body2">
-                          <Box component="span" sx={{ wordBreak: "break-word" }}>
-                            {item.title}
-                          </Box>
-                          {item.note ? ` - ${item.note}` : ""}
-                        </Typography>
-                      ))}
-                    </Stack>
-                  </Alert>
-                )}
+                <Box
+                  sx={{
+                    mt: 1.5,
+                    border: "1px dashed rgba(255,255,255,0.22)",
+                    borderRadius: 2,
+                    p: { xs: 3, md: 4 },
+                    textAlign: "center",
+                    bgcolor: "rgba(255,255,255,0.015)",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: { xs: 28, md: 36 },
+                      fontWeight: 800,
+                      letterSpacing: 1.6,
+                      lineHeight: 1,
+                      color: "rgba(255,255,255,0.96)",
+                      animation: `${comingSoonGlow} 2.2s ease-in-out infinite`,
+                    }}
+                  >
+                    COMING SOON
+                  </Typography>
+                  <Typography sx={{ mt: 1.1, color: "text.secondary" }}>
+                    Ek ekipman listesi yakinda tekrar aktif olacak.
+                  </Typography>
+                </Box>
               </CardContent>
             </Card>
 
