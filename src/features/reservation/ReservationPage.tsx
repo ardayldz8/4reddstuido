@@ -15,24 +15,7 @@ import WhatsApp from "@mui/icons-material/WhatsApp";
 import EmailRounded from "@mui/icons-material/EmailRounded";
 import Instagram from "@mui/icons-material/Instagram";
 import { keyframes } from "@mui/system";
-import { pricingItems } from "@/data/pricing";
 import { reddTheme } from "@/styles/muiTheme";
-
-const studioPackageOrder = [
-  "studio-full-day",
-  "studio-half-day",
-  "studio-hourly",
-  "studio-night-full",
-  "studio-night-half",
-  "studio-night-hourly",
-];
-
-const studioPackages = pricingItems
-  .filter((item) => item.category === "studio")
-  .sort(
-    (a, b) =>
-      studioPackageOrder.indexOf(a.id) - studioPackageOrder.indexOf(b.id)
-  );
 
 const comingSoonGlow = keyframes`
   0% {
@@ -51,14 +34,6 @@ const comingSoonGlow = keyframes`
     text-shadow: 0 0 0 rgba(255, 77, 79, 0);
   }
 `;
-
-function formatCurrency(value: number) {
-  return new Intl.NumberFormat("tr-TR", {
-    style: "currency",
-    currency: "TRY",
-    maximumFractionDigits: 0,
-  }).format(value);
-}
 
 export default function ReservationPage() {
   return (
@@ -106,43 +81,34 @@ export default function ReservationPage() {
                   1) Stüdyo Paketleri
                 </Typography>
                 <Typography sx={{ mt: 0.8, color: "text.secondary" }}>
-                  Gündüz ve gece paketleri dahil tüm stüdyo fiyatları.
+                  Bu bolum su an gecici olarak inaktif.
                 </Typography>
                 <Box
                   sx={{
-                    mt: 2,
-                    display: "grid",
-                    gridTemplateColumns: { xs: "1fr", md: "1fr 1fr 1fr" },
-                    gap: 1.5,
+                    mt: 1.5,
+                    border: "1px dashed rgba(255,255,255,0.22)",
+                    borderRadius: 2,
+                    p: { xs: 3, md: 4 },
+                    textAlign: "center",
+                    bgcolor: "rgba(255,255,255,0.015)",
                   }}
                 >
-                  {studioPackages.map((item) => (
-                    <Card key={item.id} variant="outlined" sx={{ bgcolor: "rgba(0,0,0,0.25)" }}>
-                      <CardContent>
-                        <Typography sx={{ fontWeight: 700 }}>{item.title}</Typography>
-                        {item.price > 0 ? (
-                          <>
-                            {item.note && (
-                              <Typography variant="body2" color="text.secondary" sx={{ mt: 0.3 }}>
-                                {item.note}
-                              </Typography>
-                            )}
-                            <Typography color="primary.main" fontWeight={700} sx={{ mt: 0.8 }}>
-                              {formatCurrency(item.price)}
-                            </Typography>
-                          </>
-                        ) : (
-                          <Typography color="primary.main" fontWeight={600} sx={{ mt: 0.8, fontStyle: "italic" }}>
-                            {item.note || "İletişime geçin"}
-                          </Typography>
-                        )}
-                      </CardContent>
-                    </Card>
-                  ))}
+                  <Typography
+                    sx={{
+                      fontSize: { xs: 28, md: 36 },
+                      fontWeight: 800,
+                      letterSpacing: 1.6,
+                      lineHeight: 1,
+                      color: "rgba(255,255,255,0.96)",
+                      animation: `${comingSoonGlow} 2.2s ease-in-out infinite`,
+                    }}
+                  >
+                    COMING SOON
+                  </Typography>
+                  <Typography sx={{ mt: 1.1, color: "text.secondary" }}>
+                    Paket fiyatlari yakinda tekrar aktif olacak.
+                  </Typography>
                 </Box>
-                <Typography sx={{ mt: 1.1, fontSize: 13, color: "text.secondary" }}>
-                  Bu fiyatlara KDV dahil değildir.
-                </Typography>
               </CardContent>
             </Card>
 
@@ -151,26 +117,35 @@ export default function ReservationPage() {
                 <Typography variant="h3" sx={{ fontSize: { xs: 22, md: 30 } }}>
                   2) Çalışma Saatleri
                 </Typography>
-                <Stack spacing={0.9} sx={{ mt: 1.5 }}>
-                  <Typography sx={{ color: "rgba(255,255,255,0.92)" }}>
-                    Tam Gün (10 saat): 10:00 - 20:00
+                <Typography sx={{ mt: 0.8, color: "text.secondary" }}>
+                  Bu bolum su an gecici olarak inaktif.
+                </Typography>
+                <Box
+                  sx={{
+                    mt: 1.5,
+                    border: "1px dashed rgba(255,255,255,0.22)",
+                    borderRadius: 2,
+                    p: { xs: 3, md: 4 },
+                    textAlign: "center",
+                    bgcolor: "rgba(255,255,255,0.015)",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: { xs: 28, md: 36 },
+                      fontWeight: 800,
+                      letterSpacing: 1.6,
+                      lineHeight: 1,
+                      color: "rgba(255,255,255,0.96)",
+                      animation: `${comingSoonGlow} 2.2s ease-in-out infinite`,
+                    }}
+                  >
+                    COMING SOON
                   </Typography>
-                  <Typography sx={{ color: "rgba(255,255,255,0.92)" }}>
-                    Yarım Gün (5 saat): 09:00 - 14:00 / 15:00 - 20:00
+                  <Typography sx={{ mt: 1.1, color: "text.secondary" }}>
+                    Calisma saatleri yakinda tekrar aktif olacak.
                   </Typography>
-                  <Typography sx={{ color: "rgba(255,255,255,0.92)" }}>
-                    Saatlik: 1800 TL (Min. 2 Saat)
-                  </Typography>
-                  <Typography sx={{ color: "rgba(255,255,255,0.72)", pt: 0.5 }}>
-                    Gece Saatlik: 21:00 - 07:00 arası 2000 TL
-                  </Typography>
-                  <Typography sx={{ color: "rgba(255,255,255,0.72)" }}>
-                    Gece Yarım: 21:00 - 02:00 arası 8500 TL
-                  </Typography>
-                  <Typography sx={{ color: "rgba(255,255,255,0.72)" }}>
-                    Gece Tam: 21:00 - 07:00 arası 15000 TL
-                  </Typography>
-                </Stack>
+                </Box>
               </CardContent>
             </Card>
 
