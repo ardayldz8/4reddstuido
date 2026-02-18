@@ -23,7 +23,7 @@ export const categoryLabels: Record<PricingCategory, string> = {
   camera: "Kamera ve Lens",
   modifiers: "Işık Aksesuarları",
   backdrop: "Fon",
-  included: "Kiralamaya Dahil",
+  included: "Hizmete Dahil",
 };
 
 export const pricingItems: PricingItem[] = [
@@ -32,12 +32,14 @@ export const pricingItems: PricingItem[] = [
     title: "Tam Gün Kiralama",
     price: 11500,
     category: "studio",
+    note: "10 saat",
   },
   {
     id: "studio-half-day",
     title: "Yarım Gün Kiralama",
     price: 6500,
     category: "studio",
+    note: "5 saat (09:00-14:00 / 15:00-20:00)",
   },
   {
     id: "studio-hourly",
@@ -47,11 +49,25 @@ export const pricingItems: PricingItem[] = [
     note: "Min. 2 saat",
   },
   {
-    id: "studio-night",
-    title: "Gece Seansı",
-    price: 0,
+    id: "studio-night-hourly",
+    title: "Gece Saatlik",
+    price: 2000,
     category: "studio",
-    note: "Detaylı bilgi için WhatsApp üzerinden iletişime geçin",
+    note: "21:00 - 07:00 arası",
+  },
+  {
+    id: "studio-night-half",
+    title: "Gece Yarım Seans",
+    price: 8500,
+    category: "studio",
+    note: "21:00 - 02:00 arası",
+  },
+  {
+    id: "studio-night-full",
+    title: "Gece Tam Seans",
+    price: 15000,
+    category: "studio",
+    note: "21:00 - 07:00 arası",
   },
   {
     id: "godox-m600bi",
@@ -150,7 +166,7 @@ export const pricingItems: PricingItem[] = [
     price: 0,
     category: "included",
     included: true,
-    note: "Stüdyo kiralamaya dahildir",
+    note: "Stüdyo hizmetine dahildir",
   },
   {
     id: "included-iron",

@@ -99,6 +99,9 @@ export default function ReservationPage() {
                 <Typography variant="h3" sx={{ fontSize: { xs: 22, md: 30 } }}>
                   1) Stüdyo Paketleri
                 </Typography>
+                <Typography sx={{ mt: 0.8, color: "text.secondary" }}>
+                  Gündüz ve gece paketleri dahil tüm stüdyo fiyatları.
+                </Typography>
                 <Box
                   sx={{
                     mt: 2,
@@ -144,13 +147,22 @@ export default function ReservationPage() {
                 </Typography>
                 <Stack spacing={0.9} sx={{ mt: 1.5 }}>
                   <Typography sx={{ color: "rgba(255,255,255,0.92)" }}>
-                    Tam Gün: 10:00 - 20:00
+                    Tam Gün (10 saat): 10:00 - 20:00
                   </Typography>
                   <Typography sx={{ color: "rgba(255,255,255,0.92)" }}>
-                    Yarım Gün: 09:00 - 14:00 / 15:00 - 20:00
+                    Yarım Gün (5 saat): 09:00 - 14:00 / 15:00 - 20:00
                   </Typography>
                   <Typography sx={{ color: "rgba(255,255,255,0.92)" }}>
                     Saatlik: 1800 TL (Min. 2 Saat)
+                  </Typography>
+                  <Typography sx={{ color: "rgba(255,255,255,0.72)", pt: 0.5 }}>
+                    Gece Saatlik: 21:00 - 07:00 arası 2000 TL
+                  </Typography>
+                  <Typography sx={{ color: "rgba(255,255,255,0.72)" }}>
+                    Gece Yarım Seans: 21:00 - 02:00 arası 8500 TL
+                  </Typography>
+                  <Typography sx={{ color: "rgba(255,255,255,0.72)" }}>
+                    Gece Tam Seans: 21:00 - 07:00 arası 15000 TL
                   </Typography>
                 </Stack>
               </CardContent>
@@ -159,7 +171,7 @@ export default function ReservationPage() {
             <Card variant="outlined">
               <CardContent>
                 <Typography variant="h3" sx={{ fontSize: { xs: 22, md: 30 }, mb: 1 }}>
-                  3) Kiralık Ek Ekipmanlar
+                  3) Ek Ekipmanlar
                 </Typography>
                 <Typography sx={{ color: "text.secondary", mb: 1.2 }}>
                   Bu alan sadece referans listesidir.
@@ -213,7 +225,7 @@ export default function ReservationPage() {
                 {includedItems.length > 0 && (
                   <Alert severity="success" sx={{ mt: 2 }}>
                     <Typography fontWeight={700} mb={0.5}>
-                      Kiralamaya Dahil
+                      Hizmete Dahil
                     </Typography>
                     <Stack component="ul" sx={{ pl: 2, m: 0 }}>
                       {includedItems.map((item) => (
