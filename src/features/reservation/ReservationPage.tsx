@@ -36,7 +36,21 @@ const categoryOrder: PricingCategory[] = [
   "included",
 ];
 
-const studioPackages = pricingItems.filter((item) => item.category === "studio");
+const studioPackageOrder = [
+  "studio-full-day",
+  "studio-half-day",
+  "studio-hourly",
+  "studio-night-full",
+  "studio-night-half",
+  "studio-night-hourly",
+];
+
+const studioPackages = pricingItems
+  .filter((item) => item.category === "studio")
+  .sort(
+    (a, b) =>
+      studioPackageOrder.indexOf(a.id) - studioPackageOrder.indexOf(b.id)
+  );
 const includedItems = pricingItems.filter((item) => item.category === "included");
 const rentalEquipmentGroups = categoryOrder
   .filter((category) => category !== "studio" && category !== "included")
