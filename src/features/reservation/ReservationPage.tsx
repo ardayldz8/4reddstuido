@@ -159,10 +159,10 @@ export default function ReservationPage() {
                     Gece Saatlik: 21:00 - 07:00 arası 2000 TL
                   </Typography>
                   <Typography sx={{ color: "rgba(255,255,255,0.72)" }}>
-                    Gece Yarım Seans: 21:00 - 02:00 arası 8500 TL
+                    Gece Yarım: 21:00 - 02:00 arası 8500 TL
                   </Typography>
                   <Typography sx={{ color: "rgba(255,255,255,0.72)" }}>
-                    Gece Tam Seans: 21:00 - 07:00 arası 15000 TL
+                    Gece Tam: 21:00 - 07:00 arası 15000 TL
                   </Typography>
                 </Stack>
               </CardContent>

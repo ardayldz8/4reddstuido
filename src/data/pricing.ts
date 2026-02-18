@@ -29,21 +29,21 @@ export const categoryLabels: Record<PricingCategory, string> = {
 export const pricingItems: PricingItem[] = [
   {
     id: "studio-full-day",
-    title: "Tam Gün Kiralama",
+    title: "Tam Gün",
     price: 11500,
     category: "studio",
     note: "10 saat",
   },
   {
     id: "studio-half-day",
-    title: "Yarım Gün Kiralama",
+    title: "Yarım Gün",
     price: 6500,
     category: "studio",
     note: "5 saat (09:00-14:00 / 15:00-20:00)",
   },
   {
     id: "studio-hourly",
-    title: "Saatlik Kiralama",
+    title: "Saatlik",
     price: 1800,
     category: "studio",
     note: "Min. 2 saat",
@@ -57,14 +57,14 @@ export const pricingItems: PricingItem[] = [
   },
   {
     id: "studio-night-half",
-    title: "Gece Yarım Seans",
+    title: "Gece Yarım",
     price: 8500,
     category: "studio",
     note: "21:00 - 02:00 arası",
   },
   {
     id: "studio-night-full",
-    title: "Gece Tam Seans",
+    title: "Gece Tam",
     price: 15000,
     category: "studio",
     note: "21:00 - 07:00 arası",
