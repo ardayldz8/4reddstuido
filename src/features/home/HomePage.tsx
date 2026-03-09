@@ -266,10 +266,6 @@ export default function HomePage() {
                   Konum & Ulaşım
                 </Typography>
               </Stack>
-              <Typography sx={{ color: "rgba(255,255,255,0.92)", fontWeight: 600, mb: 2.5 }}>
-                📍 Esenevler, Talatpaşa Cd, 34764 Ümraniye/İstanbul
-              </Typography>
-
               <Box
                 sx={{
                   border: "1px solid rgba(255,255,255,0.14)",
