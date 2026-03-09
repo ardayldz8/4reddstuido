@@ -270,6 +270,30 @@ export default function HomePage() {
                 📍 Esenevler, Talatpaşa Cd, 34764 Ümraniye/İstanbul
               </Typography>
 
+              <Box
+                sx={{
+                  border: "1px solid rgba(255,255,255,0.14)",
+                  borderRadius: 2,
+                  overflow: "hidden",
+                  mb: 2.5,
+                  bgcolor: "rgba(255,255,255,0.02)",
+                }}
+              >
+                <Box
+                  component="iframe"
+                  title="4Redd Studio Konum"
+                  src="https://www.google.com/maps?q=4Redd+Studio,+Esenevler,+Talatpa%C5%9Fa+Cd,+34764+%C3%9Cmraniye+%C4%B0stanbul&output=embed"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  sx={{
+                    display: "block",
+                    width: "100%",
+                    height: { xs: 250, md: 320 },
+                    border: 0,
+                  }}
+                />
+              </Box>
+
               <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1.5 }}>
                 <DirectionsTransitRounded sx={{ color: "primary.main", fontSize: 20 }} />
                 <Typography sx={{ fontWeight: 700, fontSize: 17 }}>
