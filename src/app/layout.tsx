@@ -11,13 +11,36 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://4redd.com"),
   title: "REDD Studio | Premium Yaratıcı Stüdyolar",
   description: "Ciddi yaratıcılar için ciddi bir yer. Müzik prodüksiyonu, DJ, podcast ve fotoğraf stüdyoları.",
   keywords: ["stüdyo", "müzik prodüksiyonu", "DJ", "podcast", "fotoğraf stüdyosu", "İstanbul"],
+  openGraph: {
+    title: "REDD Studio | Premium Yaratıcı Stüdyolar",
+    description: "Ciddi yaratıcılar için ciddi bir yer.",
+    url: "https://4redd.com",
+    siteName: "REDD Studio",
+    images: [
+      {
+        url: "/brand/redd-logo-share.png",
+        width: 1600,
+        height: 1600,
+        alt: "REDD Studio Logo",
+      },
+    ],
+    locale: "tr_TR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "REDD Studio | Premium Yaratıcı Stüdyolar",
+    description: "Ciddi yaratıcılar için ciddi bir yer.",
+    images: ["/brand/redd-logo-share.png"],
+  },
   icons: {
-    icon: "/brand/redd-logo.svg",
-    shortcut: "/brand/redd-logo.svg",
-    apple: "/brand/redd-logo.svg",
+    icon: "/brand/redd-logo-share.png",
+    shortcut: "/brand/redd-logo-share.png",
+    apple: "/brand/redd-logo-share.png",
   },
 };
 
